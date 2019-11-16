@@ -50,15 +50,17 @@
   };
 </script>
 
-  <meta name="description" content="一、推荐一本书–C++入门经典C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Pyt">
+  <meta name="description" content="推荐一本书–C++入门经典C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Pytho">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++链表的基本用法">
 <meta property="og:url" content="https:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="Journey of the Heart">
-<meta property="og:description" content="一、推荐一本书–C++入门经典C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Pyt">
+<meta property="og:description" content="推荐一本书–C++入门经典C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Pytho">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg">
-<meta property="og:updated_time" content="2019-11-16T02:15:58.415Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;%E4%B8%A4%E4%B8%AA%E8%8A%82%E7%82%B9.jpg">
+<meta property="og:updated_time" content="2019-11-16T05:08:12.679Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg">
 
@@ -204,7 +206,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-16 08:35:48 / Modified: 10:15:58" itemprop="dateCreated datePublished" datetime="2019-11-16T08:35:48+08:00">2019-11-16</time>
+              <time title="Created: 2019-11-16 08:35:48 / Modified: 13:08:12" itemprop="dateCreated datePublished" datetime="2019-11-16T08:35:48+08:00">2019-11-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -229,16 +231,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="一、推荐一本书–C-入门经典"><a href="#一、推荐一本书–C-入门经典" class="headerlink" title="一、推荐一本书–C++入门经典"></a>一、推荐一本书–C++入门经典</h1><p>C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Python，确实有点缺乏说服力，所以就转头开始学习C++。<br>学习C++的时候，找到一本大牛写的书–C++入门经典by Walter Savitch，通俗易懂，而且讲得都是重要的知识点，不会在某些晦涩深奥的地方浪费半点笔墨。而且这本在前言中有各章节的依赖关系，如果想针对某个方面学习，可以按照依赖图跳着学，这样效率非常高。<br><img src="C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg" alt="C++入门经典" title="C++入门经典"></p>
+        <h1 id="推荐一本书–C-入门经典"><a href="#推荐一本书–C-入门经典" class="headerlink" title="推荐一本书–C++入门经典"></a>推荐一本书–C++入门经典</h1><p>C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Python，确实有点缺乏说服力，所以就转头开始学习C++。<br>学习C++的时候，找到一本大牛写的书–C++入门经典by Walter Savitch，通俗易懂，而且讲得都是重要的知识点，不会在某些晦涩深奥的地方浪费半点笔墨。而且这本在前言中有各章节的依赖关系，如果想针对某个方面学习，可以按照依赖图跳着学，这样效率非常高。<br><img src="C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg" alt="C++入门经典" title="C++入门经典"></p>
 <hr>
-<h1 id="二、C-中的链表"><a href="#二、C-中的链表" class="headerlink" title="二、C++中的链表"></a>二、C++中的链表</h1><p>不知道其他语言是怎么样的，C++的链表是靠指针来实现的，链表是由结构或类的节点链接起来构成，在结构或类中，定义所需要的数据变量以及指向这个节点的指针变量，初始化指针后，通过指针进行访问当前节点的数据变量，或者通过指针链接到下一个节点，继而访问下一个节点的数据变量。</p>
+<h1 id="C-中的基础链表"><a href="#C-中的基础链表" class="headerlink" title="C++中的基础链表"></a>C++中的基础链表</h1><p>不知道其他语言是怎么样的，C++的链表是靠指针来实现的，链表是由结构或类的节点链接起来构成，在结构或类中，定义所需要的数据变量以及指向这个节点的指针变量，初始化指针后，通过指针进行访问当前节点的数据变量，或者通过指针链接到下一个节点，继而访问下一个节点的数据变量。</p>
 <figure class="highlight cpp"><figcaption><span>ListNode结构类型</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="built_in">string</span> item;</span><br><span class="line">	<span class="keyword">int</span> count;</span><br><span class="line">	ListNode *link;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> ListNode *ListNodePtr</span><br></pre></td></tr></table></figure>
 <p>ListNode结构类型中定义了字符串变量item、整型变量count以及指针类型link，可以看出link指针是循环定义的，C++中支持这种循环定义。</p>
 <figure class="highlight cpp"><figcaption><span>为count变量赋值</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ListNodePtr head;</span><br><span class="line">head = <span class="keyword">new</span> ListNode;</span><br><span class="line">(*head).count = <span class="number">12</span>;</span><br></pre></td></tr></table></figure>
 <p>这块代码先是将head声明为ListNodePtr指针类型，然后初始化，再对head指向的节点中的count变量赋值为12。</p>
 <figure class="highlight cpp"><figcaption><span>为count变量赋值</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head-&gt;count = <span class="number">12</span>;</span><br></pre></td></tr></table></figure>
-<p>*加.的赋值方式难免有些难懂，c++中支持箭头操作符”-&gt;”，这样就非常清晰了，将head指向的节点中count变量赋值为12。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head-&gt;item = &quot;bagels&quot;</span><br></pre></td></tr></table></figure>
+<p>*加.的赋值方式难免有些难懂，c++中支持箭头操作符”-&gt;”，这样就非常清晰了，将head指向的节点中count变量赋值为12。<br>接下来给ListNode中的item变量赋值：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head-&gt;item = <span class="string">"bagels"</span></span><br></pre></td></tr></table></figure>
+<p>这样第一个节点就完成了，如果用图片表示，就是下图这样：<br><img src="%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9.jpg" alt="ListNode第一个节点" title="第一个节点"><br>link之所以指向”?”，是因为还没有给link指定下一个节点，通过以下语句：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head-&gt;link = anotherNode;</span><br></pre></td></tr></table></figure>
+<p>就可以将第一个节点head链接到第二个节点anotherNode（这里假设还有一个节点为anotherNode)<br>当然也可以写一个插入节点的函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(ListNodePtr head, <span class="keyword">int</span> theNumber, <span class="built_in">string</span> theString)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	listNodePtr tmpNode = <span class="keyword">new</span> ListNode;</span><br><span class="line">	tmpNode-&gt;count = theNumber;</span><br><span class="line">	tmpNode-&gt;item = theString;</span><br><span class="line">	tmpNode-&gt;link = head;</span><br><span class="line">	head = tmpNode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>insert函数需要传入的参数有：需要添加节点的链表头名称head、赋给count变量的整型值以及赋给item变量的字符串，通过调用insert函数，可以在现有的head表头前添加一个节点，并将新节点的指针赋值给head。如图所示：<br><img src="%E4%B8%A4%E4%B8%AA%E8%8A%82%E7%82%B9.jpg" alt="两个节点" title="两个节点"><br>重复下去，就可以获得包含若干个节点的链表。<br>图中那个”?”号仍旧非常扎眼，实际上可以将链表的最末尾的link赋值为NULL或nullptr，这就是告诉c++，之后再没有节点了。</p>
+<h1 id="C-中其他形式的链表"><a href="#C-中其他形式的链表" class="headerlink" title="C++中其他形式的链表"></a>C++中其他形式的链表</h1><p>除了上面介绍的链表以外，通过指针和struct或类数据类型相结合，还可以设计出更为复杂的链表，比如说双向链表或者二叉树</p>
+<h2 id="1-双向链表"><a href="#1-双向链表" class="headerlink" title="(1) 双向链表"></a>(1) 双向链表</h2><h2 id="2-二叉树"><a href="#2-二叉树" class="headerlink" title="(2) 二叉树"></a>(2) 二叉树</h2>
     </div>
 
     
@@ -297,7 +306,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、推荐一本书–C-入门经典"><span class="nav-number">1.</span> <span class="nav-text">一、推荐一本书–C++入门经典</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、C-中的链表"><span class="nav-number">2.</span> <span class="nav-text">二、C++中的链表</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#推荐一本书–C-入门经典"><span class="nav-number">1.</span> <span class="nav-text">推荐一本书–C++入门经典</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-中的基础链表"><span class="nav-number">2.</span> <span class="nav-text">C++中的基础链表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-中其他形式的链表"><span class="nav-number">3.</span> <span class="nav-text">C++中其他形式的链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-双向链表"><span class="nav-number">3.1.</span> <span class="nav-text">(1) 双向链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-二叉树"><span class="nav-number">3.2.</span> <span class="nav-text">(2) 二叉树</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
