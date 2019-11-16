@@ -50,17 +50,19 @@
   };
 </script>
 
-  <meta name="description" content="Markdown基本语法 一、标题标题是在标题文字前加若干个”#”符合来生成的，几个”#”就是几级标题；  二、字体加粗是用两个”*”将需要加粗的文字包围，加粗斜体是用一个”*”将需要倾斜的文字包围，倾斜倾斜加粗是三个”*”，倾斜加粗删除线是用两个”“,~删除线~~  三、引用一个”&amp;gt;”，两个”&amp;gt;&amp;gt;”，或者无限多个”&amp;gt;&amp;gt;&amp;gt;&amp;gt;…&amp;gt;&amp;gt;&amp;gt;&amp;gt">
+  <meta name="description" content="一、推荐一本书–C++入门经典C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Pyt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一篇blog">
-<meta property="og:url" content="https:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;11&#x2F;15&#x2F;%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87blog&#x2F;index.html">
+<meta property="og:title" content="C++链表的基本用法">
+<meta property="og:url" content="https:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="Journey of the Heart">
-<meta property="og:description" content="Markdown基本语法 一、标题标题是在标题文字前加若干个”#”符合来生成的，几个”#”就是几级标题；  二、字体加粗是用两个”*”将需要加粗的文字包围，加粗斜体是用一个”*”将需要倾斜的文字包围，倾斜倾斜加粗是三个”*”，倾斜加粗删除线是用两个”“,~删除线~~  三、引用一个”&amp;gt;”，两个”&amp;gt;&amp;gt;”，或者无限多个”&amp;gt;&amp;gt;&amp;gt;&amp;gt;…&amp;gt;&amp;gt;&amp;gt;&amp;gt">
+<meta property="og:description" content="一、推荐一本书–C++入门经典C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Pyt">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-15T14:05:10.791Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg">
+<meta property="og:updated_time" content="2019-11-16T02:15:58.415Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg">
 
-<link rel="canonical" href="https://godricg.github.io/2019/11/15/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87blog/">
+<link rel="canonical" href="https://godricg.github.io/2019/11/16/C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -74,7 +76,7 @@
   };
 </script>
 
-  <title>我的第一篇blog | Journey of the Heart</title>
+  <title>C++链表的基本用法 | Journey of the Heart</title>
   
 
 
@@ -178,7 +180,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://GodricG.github.io/2019/11/15/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87blog/">
+    <link itemprop="mainEntityOfPage" href="https://GodricG.github.io/2019/11/16/C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          我的第一篇blog
+          C++链表的基本用法
         </h1>
 
         <div class="post-meta">
@@ -202,7 +204,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-15 18:17:41 / Modified: 22:05:10" itemprop="dateCreated datePublished" datetime="2019-11-15T18:17:41+08:00">2019-11-15</time>
+              <time title="Created: 2019-11-16 08:35:48 / Modified: 10:15:58" itemprop="dateCreated datePublished" datetime="2019-11-16T08:35:48+08:00">2019-11-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,8 +212,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MD%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">MD语法</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
             </span>
@@ -227,16 +229,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Markdown基本语法"><a href="#Markdown基本语法" class="headerlink" title="Markdown基本语法"></a>Markdown基本语法</h1><hr>
-<h2 id="一、标题"><a href="#一、标题" class="headerlink" title="一、标题"></a>一、标题</h2><p>标题是在标题文字前加若干个”#”符合来生成的，几个”#”就是几级标题；</p>
+        <h1 id="一、推荐一本书–C-入门经典"><a href="#一、推荐一本书–C-入门经典" class="headerlink" title="一、推荐一本书–C++入门经典"></a>一、推荐一本书–C++入门经典</h1><p>C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Python，确实有点缺乏说服力，所以就转头开始学习C++。<br>学习C++的时候，找到一本大牛写的书–C++入门经典by Walter Savitch，通俗易懂，而且讲得都是重要的知识点，不会在某些晦涩深奥的地方浪费半点笔墨。而且这本在前言中有各章节的依赖关系，如果想针对某个方面学习，可以按照依赖图跳着学，这样效率非常高。<br><img src="C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg" alt="C++入门经典" title="C++入门经典"></p>
 <hr>
-<h2 id="二、字体"><a href="#二、字体" class="headerlink" title="二、字体"></a>二、字体</h2><p>加粗是用两个”*”将需要加粗的文字包围，<strong>加粗</strong><br>斜体是用一个”*”将需要倾斜的文字包围，<em>倾斜</em><br>倾斜加粗是三个”*”，<strong><em>倾斜加粗</em></strong><br>删除线是用两个”<del>“,<br>~</del>删除线~~</p>
-<hr>
-<h2 id="三、引用"><a href="#三、引用" class="headerlink" title="三、引用"></a>三、引用</h2><p>一个”&gt;”，两个”&gt;&gt;”，或者无限多个”&gt;&gt;&gt;&gt;…&gt;&gt;&gt;&gt;”</p>
-<blockquote>
-<p><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></p>
-</blockquote>
-
+<h1 id="二、C-中的链表"><a href="#二、C-中的链表" class="headerlink" title="二、C++中的链表"></a>二、C++中的链表</h1><p>不知道其他语言是怎么样的，C++的链表是靠指针来实现的，链表是由结构或类的节点链接起来构成，在结构或类中，定义所需要的数据变量以及指向这个节点的指针变量，初始化指针后，通过指针进行访问当前节点的数据变量，或者通过指针链接到下一个节点，继而访问下一个节点的数据变量。</p>
+<figure class="highlight cpp"><figcaption><span>ListNode结构类型</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="built_in">string</span> item;</span><br><span class="line">	<span class="keyword">int</span> count;</span><br><span class="line">	ListNode *link;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> ListNode *ListNodePtr</span><br></pre></td></tr></table></figure>
+<p>ListNode结构类型中定义了字符串变量item、整型变量count以及指针类型link，可以看出link指针是循环定义的，C++中支持这种循环定义。</p>
+<figure class="highlight cpp"><figcaption><span>为count变量赋值</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ListNodePtr head;</span><br><span class="line">head = <span class="keyword">new</span> ListNode;</span><br><span class="line">(*head).count = <span class="number">12</span>;</span><br></pre></td></tr></table></figure>
+<p>这块代码先是将head声明为ListNodePtr指针类型，然后初始化，再对head指向的节点中的count变量赋值为12。</p>
+<figure class="highlight cpp"><figcaption><span>为count变量赋值</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head-&gt;count = <span class="number">12</span>;</span><br></pre></td></tr></table></figure>
+<p>*加.的赋值方式难免有些难懂，c++中支持箭头操作符”-&gt;”，这样就非常清晰了，将head指向的节点中count变量赋值为12。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head-&gt;item = &quot;bagels&quot;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -249,17 +251,14 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/15/hello-world/" rel="next" title="Hello World">
-                  <i class="fa fa-chevron-left"></i> Hello World
+                <a href="/2019/11/15/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87blog/" rel="next" title="我的第一篇blog">
+                  <i class="fa fa-chevron-left"></i> 我的第一篇blog
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/16/C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" rel="prev" title="C++链表的基本用法">
-                  C++链表的基本用法 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -298,7 +297,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Markdown基本语法"><span class="nav-number">1.</span> <span class="nav-text">Markdown基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、标题"><span class="nav-number">1.1.</span> <span class="nav-text">一、标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、字体"><span class="nav-number">1.2.</span> <span class="nav-text">二、字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、引用"><span class="nav-number">1.3.</span> <span class="nav-text">三、引用</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、推荐一本书–C-入门经典"><span class="nav-number">1.</span> <span class="nav-text">一、推荐一本书–C++入门经典</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、C-中的链表"><span class="nav-number">2.</span> <span class="nav-text">二、C++中的链表</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
