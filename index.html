@@ -175,6 +175,110 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="121.36.15.13:80/2019/11/18/hexo-nginx%E9%83%A8%E7%BD%B2%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Godric Guo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Journey of the Heart">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/18/hexo-nginx%E9%83%A8%E7%BD%B2%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">hexo+nginx部署个人博客</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-18 18:25:30 / Modified: 19:03:17" itemprop="dateCreated datePublished" datetime="2019-11-18T18:25:30+08:00">2019-11-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">网站建设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>很早以前就想搭建个人网站，但都没有付诸行动，现在终于开始着手做了，本来想一步到位搭建一个动态网站，但是发现自己建网站知识太欠缺，退而求其次搭建了静态网站，本文介绍用hexo+nginx来搭建个人博客。</p>
+<h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><p>在hexo官网上的介绍如下：</p>
+<hr>
+<p>Hexo was originally created and maintained by Tommy Chen in 2012. Since then, it has helped thousands of people to build their dream website/blog.</p>
+<hr>
+<p>hexo是基于node.js的一个静态网站框架，直接在搜索引擎中搜索Hexo即可找到官网以及中文官网，介绍安装方法的博客非常多，</p>
+<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h2 id="搭建hexo-nginx环境"><a href="#搭建hexo-nginx环境" class="headerlink" title="搭建hexo+nginx环境"></a>搭建hexo+nginx环境</h2><p>起初我是跟随B站up主CodeSheep的视频搭建的，有兴趣的可以直接去B站搜索，但是这个视频介绍的方法是，在本地写好博客内容后，同步至github，CodeSheep的初衷是非常好的，github免费、简单。唯一的问题就是，github服务器在国外，网速不确定，时好时坏，访问起来非常蛋疼，有时候2分钟都刷不出网页来，因此我就决定购买华为云主机，并注册域名来部署访问我的博客。</p>
+<hr>
+<p>购买好华为云之后，通过ssh远程连接系统，首先需要安装git工具(ubuntu下)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install git</span><br></pre></td></tr></table></figure>
+<p>然后安装nginx服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install nginx</span><br></pre></td></tr></table></figure>
+<p>创建新用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br></pre></td></tr></table></figure>
+<p>创建git仓库,并初始化myblog.git为空目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/www</span><br><span class="line">cd /var/www</span><br><span class="line">git init --bare myblog.git</span><br></pre></td></tr></table></figure>
+<p>创建静态网站目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/www/hexo</span><br></pre></td></tr></table></figure>
+<p>配置git hooks的post-receive文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /var/www/myblog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+<p>添加一下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">git --work-tree=/var/www/hexo --git-dir=/var/www/myblog.git checkout -f</span><br></pre></td></tr></table></figure>
+<p>保存并退出后，修改设置权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /var/www/myblog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+<p>并修改myblog.git目录的所有者：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R git:git myblog.git</span><br></pre></td></tr></table></figure>
+<p>将git仓库与之前创建的静态网站目录链接,并配置权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R git:git /var/www/hexo</span><br><span class="line">chmod -R 775 /var/www/hexo</span><br></pre></td></tr></table></figure>
+<p>打开本地的hexo目录，编辑_config.yml文件deploy部分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">depoly:</span><br><span class="line">	type: git</span><br><span class="line">	repository: git@ip或域名:/var/www/myblog.git</span><br><span class="line">	branch: master</span><br></pre></td></tr></table></figure>
+<p>nginx配置<br>让nginx将端口或域名指向hexo静态文件目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/sites-available/default</span><br></pre></td></tr></table></figure>
+<p>并修改一下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    listen [::]:80;</span><br><span class="line">    root /var/www/hexo; # 修改的地方</span><br><span class="line">    server_name godricguo.top www.godricguo.top; #如果需要改域名访问，修改server_name 为域名便可</span><br><span class="line">    location / &#123;</span><br><span class="line">            # First attempt to serve request as file, then</span><br><span class="line">            # as directory, then fall back to displaying a 404.</span><br><span class="line">            try_files $uri $uri/ =404;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样重新启动nginx服务，就可以在浏览器中访问自己的博客了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="121.36.15.13:80/2019/11/16/C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -466,14 +570,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
