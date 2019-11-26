@@ -200,7 +200,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-26 18:35:56 / Modified: 19:55:11" itemprop="dateCreated datePublished" datetime="2019-11-26T18:35:56+08:00">2019-11-26</time>
+              <time title="Created: 2019-11-26 18:35:56 / Modified: 20:02:55" itemprop="dateCreated datePublished" datetime="2019-11-26T18:35:56+08:00">2019-11-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -234,7 +234,7 @@
 <p>头文件和源文件已经编写完成，设置好debug或者release，以及32或64位，还需要将生成类型由.exe转为.dll，右键点击myDll项目，打开属性，配置属性-&gt;常规-&gt;项目默认值-&gt;配置类型，将配置类型更改为”动态库(.dll)”。<br>这样就可以生成解决方案了，生成完成后可以在debug或release中找到以下文件：<br><img src="%E7%94%9F%E6%88%90%E7%9A%84dll%E5%92%8Clib%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E4%BB%8E%E6%BA%90%E7%A0%81%E4%B8%AD%E5%A4%8D%E5%88%B6%E6%9D%A5%E7%9A%84math.h%E5%A4%B4%E6%96%87%E4%BB%B6.png" alt="生成的文件" title="生成的文件和复制过来的头文件"></p>
 <p>然后新建一个项目叫importDll，可以是控制台程序，在源文件出添加importDll.cpp文件，其源码如下</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math1.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> godricdll;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">math1 <span class="title">m1</span><span class="params">(<span class="number">4</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; m1.sum()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt; x;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然还需做一些配置将math1.h、math1.lib及math1.dll放到正确的文件夹，来调用math1.dll。</p>
+<p>当然还需做一些配置将math1.h、math1.lib及math1.dll放到正确的文件夹，来调用math1.dll。<br>右键importDll，选择”属性”<br>配置属性-&gt;VC++目录-&gt;包含目录(包含放置math1.h文件的文件夹)和库目录(包含math1.lib文件的文件夹)；<br>配置属性-&gt;链接器-&gt;输入-&gt;附加依赖项(包含math1.lib)<br>将math1.dll文件放入importDll的debug或者release文件夹中<br>至此配置结束，可以运行importDll了<br><img src="%E6%BA%90%E7%A0%81%E5%8F%8A%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="importDll源码及运行结果" title="importDll源码及运行结果"><br>上面就是importDll源码及运行结果。</p>
 
       
     </div>
