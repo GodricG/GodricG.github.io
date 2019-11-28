@@ -58,7 +58,7 @@
 <meta property="og:description" content="委托可以认为委托是拥有一个或多个方法的对象，这里的对象和面向对象编程中的对象略有区别，正常情况下是不能“执行”一个对象，但是委托与典型的对象不同。可以“执行”委托，此时委托会“执行”它包含的所有方法。 声明委托声明委托就像是在头文件中声明一个函数头，只不过需要在返回类型前面加上关键词”delegate” 12delegate void MyDel(int a, int b);MyDel myDel">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="121.36.15.13:80&#x2F;2019&#x2F;11&#x2F;26&#x2F;C-%E7%9A%84%E5%A7%94%E6%89%98%E4%B8%8E%E4%BA%8B%E4%BB%B6&#x2F;Event.png">
-<meta property="og:updated_time" content="2019-11-28T07:08:41.404Z">
+<meta property="og:updated_time" content="2019-11-28T07:13:40.856Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="121.36.15.13:80&#x2F;2019&#x2F;11&#x2F;26&#x2F;C-%E7%9A%84%E5%A7%94%E6%89%98%E4%B8%8E%E4%BA%8B%E4%BB%B6&#x2F;Event.png">
 
@@ -210,7 +210,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-28 15:08:41" itemprop="dateModified" datetime="2019-11-28T15:08:41+08:00">2019-11-28</time>
+                <time title="Modified: 2019-11-28 15:13:40" itemprop="dateModified" datetime="2019-11-28T15:13:40+08:00">2019-11-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -245,6 +245,7 @@
 <p>上面的代码中，定义了一个myClass类，其中包含两个私有整型变量num1、num2,及一个sunTwoNum的求和方法；<br>将myDelegate实例化，并且将m1.sumTwoNum赋给myDelegate委托，这样执行myDelegate()后，就可在控制台输出1+2的结果。</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myDelegate += <span class="keyword">class</span>.<span class="title">method2</span>;</span><br><span class="line">myDelegate += <span class="keyword">class</span>.<span class="title">method3</span>;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>上面的代码展示了给myDelegate增加更多的实例方法，通过”+=”赋值，也可以将静态方法赋给委托对象，这样在执行委托时，就会执行其中“拥有”的全部方法。</p>
+<hr>
 <h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><p>程序运行时常常会有这样的需求，就是在某个特定事件发生时，程序的其他部分可以得到该事件已经发生的通知，事件就可以满足这种需求。<br>发布者类定义了一些程序其他类可能感兴趣的事件，其他类就可以注册这些事件，当发布者类的定义事件发生时，已经注册的类就可以获得通知，事件触发后执行的方法称为回调方法，也可以称为事件处理程序。<br>为什么要将委托和事件一起来介绍，就是因为事件就像是专门用于特殊途径的简单委托。</p>
 <h2 id="通过事件传递参数的例子"><a href="#通过事件传递参数的例子" class="headerlink" title="通过事件传递参数的例子"></a>通过事件传递参数的例子</h2><p>这个例子中包含一个Args类，该类是用来保存需要从发布者传递到订阅者的信息；当然还需要一个publisher类，publisher中有RunInPub方法，从方法名中就可以看出，这个方法是在publisher的实例中的方法，当publisher的实例运行该方法，就会将Args类的实例信息发送出去；最后还需要一个subscriber类，subscriber类中包含EventForPublisher方法，从该方法的名字可以看出，这个方法是订阅者subscriber在publisher注册的方法。<br>以下为Args类的定义</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Args</span> : <span class="title">EventArgs</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">string</span> name;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">bool</span> isStupid;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Args</span>(<span class="params"><span class="keyword">string</span> theName, <span class="keyword">int</span> theAge, <span class="keyword">bool</span> stupidState</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            name = theName;</span><br><span class="line">            age = theAge;</span><br><span class="line">            isStupid = stupidState;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">string</span> <span class="title">boolToString</span>(<span class="params"><span class="keyword">bool</span> state</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (state)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"stupid"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"not stupid"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">string</span>[] <span class="title">GetArgs</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">string</span>[] argsArray = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">3</span>];</span><br><span class="line">            argsArray[<span class="number">0</span>] = name;</span><br><span class="line">            argsArray[<span class="number">1</span>] = age.ToString();</span><br><span class="line">            argsArray[<span class="number">2</span>] = boolToString(isStupid);</span><br><span class="line">            <span class="keyword">return</span> argsArray;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -278,6 +279,9 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/28/C-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" rel="prev" title="C#回调函数">
+                  C#回调函数 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
       </footer>
@@ -332,7 +336,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
