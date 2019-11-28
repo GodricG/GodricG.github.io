@@ -175,6 +175,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="121.36.15.13:80/2019/11/26/C-%E7%9A%84%E5%A7%94%E6%89%98%E4%B8%8E%E4%BA%8B%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Godric Guo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Journey of the Heart">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/26/C-%E7%9A%84%E5%A7%94%E6%89%98%E4%B8%8E%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">C#的委托与事件</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-26 20:27:31" itemprop="dateCreated datePublished" datetime="2019-11-26T20:27:31+08:00">2019-11-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-28 15:08:41" itemprop="dateModified" datetime="2019-11-28T15:08:41+08:00">2019-11-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="委托"><a href="#委托" class="headerlink" title="委托"></a>委托</h1><p>可以认为委托是拥有一个或多个方法的对象，这里的对象和面向对象编程中的对象略有区别，正常情况下是不能“执行”一个对象，但是委托与典型的对象不同。可以“执行”委托，此时委托会“执行”它包含的所有方法。</p>
+<h2 id="声明委托"><a href="#声明委托" class="headerlink" title="声明委托"></a>声明委托</h2><p>声明委托就像是在头文件中声明一个函数头，只不过需要在返回类型前面加上关键词”delegate”</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">delegate</span> <span class="keyword">void</span> <span class="title">MyDel</span>(<span class="params"><span class="keyword">int</span> a, <span class="keyword">int</span> b</span>)</span>;</span><br><span class="line">MyDel myDelegate;</span><br></pre></td></tr></table></figure>
+<p>上面就是声明了一个委托类型MyDel,该委托类型需要传入两个整型参数a、b，并且会返回void，第二行代码创建了myDelegate实例。</p>
+<hr>
+<p>接下来做一个简单演示，定义一个委托和一个myClass类，其中包含sumTwoNum方法，将该方法赋给委托，通过委托来进行计算两个数的和；</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MyDelegate</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">delegate</span> <span class="keyword">int</span> <span class="title">MyDel</span>(<span class="params"></span>)</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			myClass m1 = <span class="keyword">new</span> myClass(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">			MyDel myDelegate = <span class="keyword">new</span> MyDel(m1.sumTwoNum);</span><br><span class="line">			Console.WriteLine(myDelegate());</span><br><span class="line">					</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">myClass</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> num1;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> num2;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumTwoNum</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">return</span> num1+num2;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">myClass</span>(<span class="params"><span class="keyword">int</span> a, <span class="keyword">int</span> b</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			num1 = a;</span><br><span class="line">			num2 = b;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码中，定义了一个myClass类，其中包含两个私有整型变量num1、num2,及一个sunTwoNum的求和方法；<br>将myDelegate实例化，并且将m1.sumTwoNum赋给myDelegate委托，这样执行myDelegate()后，就可在控制台输出1+2的结果。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myDelegate += <span class="keyword">class</span>.<span class="title">method2</span>;</span><br><span class="line">myDelegate += <span class="keyword">class</span>.<span class="title">method3</span>;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>上面的代码展示了给myDelegate增加更多的实例方法，通过”+=”赋值，也可以将静态方法赋给委托对象，这样在执行委托时，就会执行其中“拥有”的全部方法。</p>
+<h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><p>程序运行时常常会有这样的需求，就是在某个特定事件发生时，程序的其他部分可以得到该事件已经发生的通知，事件就可以满足这种需求。<br>发布者类定义了一些程序其他类可能感兴趣的事件，其他类就可以注册这些事件，当发布者类的定义事件发生时，已经注册的类就可以获得通知，事件触发后执行的方法称为回调方法，也可以称为事件处理程序。<br>为什么要将委托和事件一起来介绍，就是因为事件就像是专门用于特殊途径的简单委托。</p>
+<h2 id="通过事件传递参数的例子"><a href="#通过事件传递参数的例子" class="headerlink" title="通过事件传递参数的例子"></a>通过事件传递参数的例子</h2><p>这个例子中包含一个Args类，该类是用来保存需要从发布者传递到订阅者的信息；当然还需要一个publisher类，publisher中有RunInPub方法，从方法名中就可以看出，这个方法是在publisher的实例中的方法，当publisher的实例运行该方法，就会将Args类的实例信息发送出去；最后还需要一个subscriber类，subscriber类中包含EventForPublisher方法，从该方法的名字可以看出，这个方法是订阅者subscriber在publisher注册的方法。<br>以下为Args类的定义</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Args</span> : <span class="title">EventArgs</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">string</span> name;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">bool</span> isStupid;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Args</span>(<span class="params"><span class="keyword">string</span> theName, <span class="keyword">int</span> theAge, <span class="keyword">bool</span> stupidState</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            name = theName;</span><br><span class="line">            age = theAge;</span><br><span class="line">            isStupid = stupidState;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">string</span> <span class="title">boolToString</span>(<span class="params"><span class="keyword">bool</span> state</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (state)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"stupid"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"not stupid"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">string</span>[] <span class="title">GetArgs</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">string</span>[] argsArray = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">3</span>];</span><br><span class="line">            argsArray[<span class="number">0</span>] = name;</span><br><span class="line">            argsArray[<span class="number">1</span>] = age.ToString();</span><br><span class="line">            argsArray[<span class="number">2</span>] = boolToString(isStupid);</span><br><span class="line">            <span class="keyword">return</span> argsArray;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出Args类是继承于EventArgs类，EventArgs类是专门用来在事件的发布者与订阅者之间传递参数的类，Args类中包含三个字段name、age和isStupid，为了数据安全，三个字段均设为private；一个Args的构造函数，用于初始化Args的实例；一个boolToString方法，用于将bool类型isStupid转化为字符串类型；一个GetArgs()函数，返回包含私有字段的字符转数组。</p>
+<hr>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">publisher</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">event</span> EventHandler&lt;Args&gt; Event;</span><br><span class="line">        Args godricArgs = <span class="keyword">new</span> Args(<span class="string">"godric"</span>,<span class="number">30</span>,<span class="literal">true</span>);</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">publisher</span>(<span class="params">subscriber sub</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">this</span>.Event += sub.EventForPublisher;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">RunInPub</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Event(<span class="keyword">this</span>, godricArgs);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>以上为publisher类，该类中通过：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">event</span> EventHandler&lt;Args&gt; Event;</span><br></pre></td></tr></table></figure>
+<p>语句，声明了Event事件，该事件是通过泛型委托EventHandler<Args>自定义的类注册的；在publisher的构造函数中，将sub实例的EventForPublisher方法“赋值”给Event事件，意思就是Event事件中现在有了一个方法，这个方法就是EventForPublisher；在RunInPub方法中，通过执行Eevnt(this, godricArgs)，将godricArgs中的信息发布出去</p>
+<hr>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">subscriber</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">EventForPublisher</span>(<span class="params"><span class="keyword">object</span> o, Args args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line"></span><br><span class="line">            Console.WriteLine(<span class="string">"The name is "</span>+args.GetArgs()[<span class="number">0</span>]+</span><br><span class="line">                              <span class="string">", the age is "</span>+args.GetArgs()[<span class="number">1</span>]+<span class="string">" and he is "</span>+args.GetArgs()[<span class="number">2</span>]+<span class="string">"."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>以上为subscriber类，该类中只包含有一个EventForPublisher方法，从名字也可以看出，这个方法就是subscriber的实例注册到事件Event中的方法，该方法执行后，会将args传来的数组中的信息显示出来。<br>以上的代码组合起来，就实现了从publisher类中将godricArgs信息传递出去，并且传递的方法是在subscriber中定义的。<br><img src="Event.png" alt="事件运行结果" title="事件运行结果"><br>最后，我努力来打个比方，事件的发布和订阅就好比是，发布者好比是西餐厅，订阅者就好比顾客，西餐厅可以提供各种服务，但是具体是什么服务，需要顾客来”订阅(this.Event += sub.EventForPublisher)”，比如顾客说要一份牛排并且三分熟(void EventForPublisher(object o, Args args))，餐厅就会按要求(void EventForPublisher(object o, Args args))把牛排做好(执行Event(this, godricArgs))，我现在也就只能理解到这个程度了，以后如果有新的想法，在添加吧。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="121.36.15.13:80/2019/11/26/C-%E7%94%9F%E6%88%90DLL%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -649,14 +746,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
