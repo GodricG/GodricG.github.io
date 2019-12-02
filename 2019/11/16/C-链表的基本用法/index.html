@@ -53,18 +53,18 @@
   <meta name="description" content="推荐一本书–C++入门经典C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Pytho">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++链表的基本用法">
-<meta property="og:url" content="121.36.15.13:80&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;godricguo.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="Journey of the Heart">
 <meta property="og:description" content="推荐一本书–C++入门经典C++已经流行多年，问别人该学什么编程语言，基本没有推荐C++的；现在刚入门机器视觉，也在一开始听着网上老司机学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python学Python，Python学得一知半解，如果说只是写个算法来达到某种目标，Python+OpenCV肯定是能行的，但是不同项目可能有这样或那样的要求，如果只会一点点Pytho">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="121.36.15.13:80&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg">
-<meta property="og:image" content="121.36.15.13:80&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9.jpg">
-<meta property="og:image" content="121.36.15.13:80&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;%E4%B8%A4%E4%B8%AA%E8%8A%82%E7%82%B9.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;godricguo.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;godricguo.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;godricguo.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;%E4%B8%A4%E4%B8%AA%E8%8A%82%E7%82%B9.jpg">
 <meta property="og:updated_time" content="2019-11-17T11:20:06.295Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="121.36.15.13:80&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;godricguo.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95&#x2F;C++%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8.jpg">
 
-<link rel="canonical" href="121.36.15.13:80/2019/11/16/C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
+<link rel="canonical" href="http://godricguo.github.io/2019/11/16/C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -182,7 +182,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="121.36.15.13:80/2019/11/16/C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://godricguo.github.io/2019/11/16/C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
