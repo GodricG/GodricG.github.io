@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="简介基于C#的Winform开发时，经常会涉及窗体间传值，比如配置某个参数，通常的方式是点击按钮弹出对话框，然后在TextBox中输入参数，点击确认后，关闭弹出对话框并将TextBox中参数传递给主界面，这里就涉及到两个窗体间传值 基于事件的窗体传值这里展示一个简单的例子，新建一个名为PassArgs的窗体应用，默认窗体Form1作为主窗体，在其中拖入一个TextBox框和一个Button按钮，分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C#窗体间传值">
+<meta property="og:url" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;03&#x2F;C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC&#x2F;index.html">
+<meta property="og:site_name" content="Journey of the Heart">
+<meta property="og:description" content="简介基于C#的Winform开发时，经常会涉及窗体间传值，比如配置某个参数，通常的方式是点击按钮弹出对话框，然后在TextBox中输入参数，点击确认后，关闭弹出对话框并将TextBox中参数传递给主界面，这里就涉及到两个窗体间传值 基于事件的窗体传值这里展示一个简单的例子，新建一个名为PassArgs的窗体应用，默认窗体Form1作为主窗体，在其中拖入一个TextBox框和一个Button按钮，分">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;03&#x2F;C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC&#x2F;Form1_ori.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;03&#x2F;C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC&#x2F;conf.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;03&#x2F;C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC&#x2F;Form1%E9%83%A8%E5%88%86.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;03&#x2F;C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC&#x2F;conf%E9%83%A8%E5%88%86.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;03&#x2F;C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC&#x2F;%E7%BB%93%E6%9E%9C1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;03&#x2F;C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC&#x2F;%E7%BB%93%E6%9E%9C2.png">
+<meta property="og:updated_time" content="2019-12-03T07:48:46.442Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;03&#x2F;C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC&#x2F;Form1_ori.png">
+
+<link rel="canonical" href="http://godricg.github.io/2019/12/03/C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>C#窗体间传值 | Journey of the Heart</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Journey of the Heart</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://godricg.github.io/2019/12/03/C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Godric Guo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Journey of the Heart">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C#窗体间传值
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-03 10:23:29 / Modified: 15:48:46" itemprop="dateCreated datePublished" datetime="2019-12-03T10:23:29+08:00">2019-12-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSharp/" itemprop="url" rel="index">
+                    <span itemprop="name">CSharp</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>基于C#的Winform开发时，经常会涉及窗体间传值，比如配置某个参数，通常的方式是点击按钮弹出对话框，然后在TextBox中输入参数，点击确认后，关闭弹出对话框并将TextBox中参数传递给主界面，这里就涉及到两个窗体间传值</p>
+<h2 id="基于事件的窗体传值"><a href="#基于事件的窗体传值" class="headerlink" title="基于事件的窗体传值"></a>基于事件的窗体传值</h2><p>这里展示一个简单的例子，新建一个名为PassArgs的窗体应用，默认窗体Form1作为主窗体，在其中拖入一个TextBox框和一个Button按钮，分别作为显示参数框和配置按钮，将TextBox的Multiline设为true。<br><img src="Form1_ori.png" alt="主界面" title="原始主界面"><br>创建一个新窗口作为弹出的配置窗口，右键PassArgs工程名，选择添加-&gt;新建项-&gt;Windows窗体，命名为conf.cs，点击确认<br><img src="conf.png" alt="配置窗体" title="配置窗体"><br>点击“配置”按钮后弹出conf窗体的设置非常简单，双击“配置”按钮，<br>在“private void button1_Click(object sender, EventArgs e)”内输入以下代码：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conf conf1 = <span class="keyword">new</span> conf();</span><br><span class="line">conf1.ShowDialog();</span><br></pre></td></tr></table></figure>
+<p>现在弹窗配置完成。</p>
+<hr>
+<p>打算通过conf对话框中的两个TextBox向Form1传入两个参数，比如“Godric”和“Stupid”，然后显示在Form1的TextBox中<br>因为传递的是两个参数，但是EventHandler类只能传递一个参数，因此在Form1.cs中定义一个Args类，用来保存“Godric”和“Stupid”。Args类定义如下：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Args</span> : <span class="title">EventArgs</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">string</span> name;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">string</span> state;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="title">Args</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>            &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="title">Args</span>(<span class="params"><span class="keyword">string</span> theName, <span class="keyword">string</span> theState</span>)</span></span><br><span class="line"><span class="function"></span>            &#123;</span><br><span class="line">                name = theName;</span><br><span class="line">                state = theState;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">getName</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>            &#123;</span><br><span class="line">                <span class="keyword">return</span> name;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">getState</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>            &#123;</span><br><span class="line">                <span class="keyword">return</span> state;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">PassArgs</span>(<span class="params"><span class="keyword">object</span> o, Args e</span>)</span></span><br><span class="line"><span class="function"></span>            &#123;</span><br><span class="line">                args1.name = e.name;</span><br><span class="line">                args1.state = e.state;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>Args类中有两个字段name、state，两个构造函数Args()、Args(string theName, string theState)，以及两个方法getName()、getState()和一个静态方法PassArgs(object o, Args e)，PassArgs作为事件的注册函数，注册到接下来将要定义的事件中，PassArgs的定义中包含args1对象，使得PassArgs的扩展性变差，但是没有办法，事件传值只能有(object o, Args e)两个参数。<br>接下来定义conf.cs中的“确认”按钮，双击“确认”输入一下代码：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">button1_Click</span>(<span class="params"><span class="keyword">object</span> sender, EventArgs e</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Form1.Args args1 = <span class="keyword">new</span> Form1.Args(textBox1.Text,textBox2.Text);</span><br><span class="line">            confPass += Form1.Args.PassArgs;</span><br><span class="line">            confPass(<span class="keyword">this</span>, args1);</span><br><span class="line">            Close();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>其中confPass为事件名，需要添加在conf.cs的conf类最开始位置：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">event</span> EventHandler&lt;Form1.Args&gt; confPass;</span><br></pre></td></tr></table></figure>
+<p><img src="Form1%E9%83%A8%E5%88%86.png" alt="Form1.cs中的代码" title="Form1.cs中的代码"></p>
+<hr>
+<p><img src="conf%E9%83%A8%E5%88%86.png" alt="conf.cs中的代码" title="conf.cs中的代码"><br>下面是运行结果：<br><img src="%E7%BB%93%E6%9E%9C1.png" alt=""><br><img src="%E7%BB%93%E6%9E%9C2.png" alt=""></p>
+<hr>
+<h2 id="基于DialogResult传值"><a href="#基于DialogResult传值" class="headerlink" title="基于DialogResult传值"></a>基于DialogResult传值</h2><p>基于DialogResult传值方法比较简单，当弹出窗口conf的DialogResult属性设置为OK时，可以在主窗口中获得参数值。<br>和之前一样，仍旧定义Args类：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Args</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="title">Args</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="title">Args</span>(<span class="params"><span class="keyword">string</span> theName, <span class="keyword">string</span> theState</span>)</span></span><br><span class="line"><span class="function"></span>            &#123;</span><br><span class="line">                name = theName;</span><br><span class="line">                state = theState;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">string</span> name;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">string</span> state;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">getName</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>            &#123;</span><br><span class="line">                <span class="keyword">return</span> name;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">getState</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>            &#123;</span><br><span class="line">                <span class="keyword">return</span> state;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>“配置”按钮的点击代码如下：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">args = <span class="keyword">new</span> Args(textBox1.Text,textBox2.Text);</span><br><span class="line">DialogResult = DialogResult.OK;</span><br></pre></td></tr></table></figure>
+<p>在conf类中声明一个名为args的Args类，上面的代码第一句是将args实例化并通过Args类的第二个构造函数将TextBox.Text和textBox2.Text赋值给args，第二行代码将conf1的DialogResult属性更改为OK状态，然后关闭对话框。<br>在conf1.cs中需要定义属性argsPass：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Args argsPass</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">set</span> &#123;&#125;</span><br><span class="line">            <span class="keyword">get</span> &#123; <span class="keyword">return</span> args; &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>C#中属性的使用和对象中的方法非常类似，属性看起来非常像写入或读取一个字段，语法相同，属性和字段不同的是，字段会为数据分配内存地址，属性不会为数据分配内存地址。上面的代码定义了名为argsPass的Args类型的属性，set访问器为空，get访问器返回预先声明的Args类型的args对象。<br>form1中的“配置”按钮代码如下：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conf conf1 = <span class="keyword">new</span> conf();</span><br><span class="line">            conf1.ShowDialog();</span><br><span class="line">            <span class="keyword">if</span> (conf1.DialogResult == DialogResult.OK)</span><br><span class="line">            &#123;</span><br><span class="line">                listBox1.Items.Add(conf1.argsPass.getName());</span><br><span class="line">                listBox1.Items.Add(conf1.argsPass.getState());</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+<p>其中if判断conf1的DialogResult属性是否为OK，如果是，将conf1的argsPass属性传出的Args对象在listBox1中分行显示。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>从上面两个例子可以看出，相比于DialogResult传值，事件传值过程比较复杂，而且逻辑难于梳理，但是事件作为C#中的一个重要特性，仍然有必要掌握。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/28/C-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" rel="next" title="C#回调函数">
+                  <i class="fa fa-chevron-left"></i> C#回调函数
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于事件的窗体传值"><span class="nav-number">1.1.</span> <span class="nav-text">基于事件的窗体传值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于DialogResult传值"><span class="nav-number">1.2.</span> <span class="nav-text">基于DialogResult传值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Godric Guo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Godric Guo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Godric Guo</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
