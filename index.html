@@ -175,6 +175,88 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://godricg.github.io/2019/12/05/C-%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Godric Guo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Journey of the Heart">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/05/C-%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">C#中的泛型</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-05 16:01:37" itemprop="dateCreated datePublished" datetime="2019-12-05T16:01:37+08:00">2019-12-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-06 16:54:09" itemprop="dateModified" datetime="2019-12-06T16:54:09+08:00">2019-12-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSharp/" itemprop="url" rel="index">
+                    <span itemprop="name">CSharp</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><p>一般使用的类声明中用到的类型都是特定类型，比如程序员自定义的类型，或者C#定义的类型。有些时候对于某个类型，我们希望这个类型能保存int类型的数据，同时也希望它能保存string类型的数据，如果没有泛型的概念，我们就需要定义两个非常相似的类，一个用来保存int，另一个用来保存string，这样可以满足我们的需求，但是会包含很多重复的工作：复制粘贴一遍int的类，然后将关键字int全部修改为string，这样很容易出错，而且在编译的时候，这两个类型都会进行编译，如果这样的类型较多，会使得生成的程序冗长。<br>C#中的泛型可以解决这个问题，我们可以使用泛型建立一个满足需求的模板，只需要在使用前声明其数据类型是int还是string，就可以正常使用。</p>
+<h2 id="定义一个泛型"><a href="#定义一个泛型" class="headerlink" title="定义一个泛型"></a>定义一个泛型</h2><p>定义泛型的时候，与自定义类很相似，只是需要加上泛型占位符<T>，”T”可以是任意的。下面来定义一个简单泛型：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Stack&lt;T&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> T[] StackArray;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> StackPointer = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">int</span> MaxStack = <span class="number">10</span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Stack</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            StackArray = <span class="keyword">new</span> T[MaxStack];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">bool</span> IsFull</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">get</span> &#123; <span class="keyword">return</span> (StackPointer &gt;= MaxStack); &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">bool</span> IsEmpty &#123; <span class="keyword">get</span> &#123; <span class="keyword">return</span> StackPointer &lt;= <span class="number">0</span>; &#125; &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span>(<span class="params">T x</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!IsFull)</span><br><span class="line">            &#123;</span><br><span class="line">                StackArray[StackPointer++] = x;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> T <span class="title">pop</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">return</span> (!IsEmpty)</span><br><span class="line">                ? StackArray[StackPointer--]</span><br><span class="line">                : StackArray[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Print</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = StackPointer - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(<span class="string">"Value: &#123;0&#125;"</span>,StackArray[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码自定义了栈泛型，可以实现int、string、double等类型数据入栈出栈。<br>字段StackArray是T类型的数组，用来保存T类型数据，StackPointer是栈的指针，为当前数据的序数。StackArray类里面有两个返回bool值的方法，用来判断栈是否为空或满，以及入栈方法push()和出栈方法pop()，还有一个打印栈内所有数据的方法Print()。<br>接下来我们使用该泛型建立int和string的数据栈，将一系列数据压入，并打印栈中全部数据，代码如下：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Stack&lt;<span class="keyword">int</span>&gt; StackInt = <span class="keyword">new</span> Stack&lt;<span class="keyword">int</span>&gt;();</span><br><span class="line">            Stack&lt;<span class="keyword">string</span>&gt; StackString = <span class="keyword">new</span> Stack&lt;<span class="keyword">string</span>&gt;();</span><br><span class="line">            StackInt.push(<span class="number">3</span>);</span><br><span class="line">            StackInt.push(<span class="number">11</span>);</span><br><span class="line">            StackInt.push(<span class="number">1</span>);</span><br><span class="line">            StackInt.push(<span class="number">42</span>);</span><br><span class="line">            StackInt.push(<span class="number">23</span>);</span><br><span class="line">            StackInt.push(<span class="number">15</span>);</span><br><span class="line">            StackInt.push(<span class="number">77</span>);</span><br><span class="line">            StackInt.Print();</span><br><span class="line">            StackString.push(<span class="string">"I'm Godric."</span>);</span><br><span class="line">            StackString.push(<span class="string">"And stupid!"</span>);</span><br><span class="line">            StackString.Print();</span><br><span class="line">            <span class="keyword">var</span> intData = <span class="keyword">new</span> PieceOfData&lt;<span class="keyword">int</span>&gt;(<span class="number">10</span>);</span><br><span class="line">            <span class="keyword">var</span> stringData = <span class="keyword">new</span> PieceOfData&lt;<span class="keyword">string</span>&gt;(<span class="string">"Godric"</span>);</span><br><span class="line">            Console.WriteLine(<span class="string">"Value: &#123;0&#125;"</span>,intData.Data);</span><br><span class="line">            Console.WriteLine(<span class="string">"Value: &#123;0&#125;"</span>,stringData.Data);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码通过Stack<T>泛型创建了StackInt实例和StackString实例，通过实例的push()方法将一系列数压入StackInt栈中，并将“I’m Godric。”和“And stupid!”压入StackString栈中，最后通过实例的Print()方法将栈中所有元素按与入栈相反的顺序打印到屏幕，运行结果如图：<br><img src="result.png" alt="运行结果" title="运行结果"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>C#的泛型可以将已经抽象过的面向对象类进行进一步的抽象，使得程序设计更加灵活，减少重复代码，尤其适用于类结构相似、字段类型不同的情况，可以大大提高编程速度并降低错误率。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://godricg.github.io/2019/12/03/C-%E7%AA%97%E4%BD%93%E9%97%B4%E4%BC%A0%E5%80%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -925,7 +1007,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
