@@ -50,17 +50,19 @@
   };
 </script>
 
-  <meta name="description" content="Markdown基本语法 一、标题标题是在标题文字前加若干个”#”符合来生成的，几个”#”就是几级标题；  二、字体加粗是用两个”*”将需要加粗的文字包围，加粗斜体是用一个”*”将需要倾斜的文字包围，倾斜倾斜加粗是三个”*”，倾斜加粗删除线是用两个”“,~删除线~~  三、引用一个”&amp;gt;”，两个”&amp;gt;&amp;gt;”，或者无限多个”&amp;gt;&amp;gt;&amp;gt;&amp;gt;…&amp;gt;&amp;gt;&amp;gt;&amp;gt">
+  <meta name="description" content="异步方法介绍大多数编程语言都支持多进程、多线程编程，在Win窗体应用开发中，使用多线程开发可以大大提高程序性能，避免出现卡顿，C#中定义多线程略微有一些繁琐。在某个情况下，只是为某个简单方法定义一个线程有些浪费，这时就可以使用C#中的异步方法，让程序运行到这里时，自动定义一个线程去执行异步方法，程序员不需要为此多花费精力。异步方法在完成其工作之前即返回到调用该方法的地方，主进程可以继续执行，不需要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一篇blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;11&#x2F;15&#x2F;%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87blog&#x2F;index.html">
+<meta property="og:title" content="C#的异步方法">
+<meta property="og:url" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;14&#x2F;C-%E7%9A%84%E5%BC%82%E6%AD%A5%E6%96%B9%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="Journey of the Heart">
-<meta property="og:description" content="Markdown基本语法 一、标题标题是在标题文字前加若干个”#”符合来生成的，几个”#”就是几级标题；  二、字体加粗是用两个”*”将需要加粗的文字包围，加粗斜体是用一个”*”将需要倾斜的文字包围，倾斜倾斜加粗是三个”*”，倾斜加粗删除线是用两个”“,~删除线~~  三、引用一个”&amp;gt;”，两个”&amp;gt;&amp;gt;”，或者无限多个”&amp;gt;&amp;gt;&amp;gt;&amp;gt;…&amp;gt;&amp;gt;&amp;gt;&amp;gt">
+<meta property="og:description" content="异步方法介绍大多数编程语言都支持多进程、多线程编程，在Win窗体应用开发中，使用多线程开发可以大大提高程序性能，避免出现卡顿，C#中定义多线程略微有一些繁琐。在某个情况下，只是为某个简单方法定义一个线程有些浪费，这时就可以使用C#中的异步方法，让程序运行到这里时，自动定义一个线程去执行异步方法，程序员不需要为此多花费精力。异步方法在完成其工作之前即返回到调用该方法的地方，主进程可以继续执行，不需要">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-15T14:05:10.791Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;14&#x2F;C-%E7%9A%84%E5%BC%82%E6%AD%A5%E6%96%B9%E6%B3%95&#x2F;%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
+<meta property="og:updated_time" content="2019-12-14T12:34:28.334Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;godricg.github.io&#x2F;2019&#x2F;12&#x2F;14&#x2F;C-%E7%9A%84%E5%BC%82%E6%AD%A5%E6%96%B9%E6%B3%95&#x2F;%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
 
-<link rel="canonical" href="http://godricg.github.io/2019/11/15/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87blog/">
+<link rel="canonical" href="http://godricg.github.io/2019/12/14/C-%E7%9A%84%E5%BC%82%E6%AD%A5%E6%96%B9%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -74,7 +76,7 @@
   };
 </script>
 
-  <title>我的第一篇blog | Journey of the Heart</title>
+  <title>C#的异步方法 | Journey of the Heart</title>
   
 
 
@@ -178,7 +180,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://godricg.github.io/2019/11/15/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87blog/">
+    <link itemprop="mainEntityOfPage" href="http://godricg.github.io/2019/12/14/C-%E7%9A%84%E5%BC%82%E6%AD%A5%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -191,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          我的第一篇blog
+          C#的异步方法
         </h1>
 
         <div class="post-meta">
@@ -202,7 +204,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-15 18:17:41 / Modified: 22:05:10" itemprop="dateCreated datePublished" datetime="2019-11-15T18:17:41+08:00">2019-11-15</time>
+              <time title="Created: 2019-12-14 12:32:19 / Modified: 20:34:28" itemprop="dateCreated datePublished" datetime="2019-12-14T12:32:19+08:00">2019-12-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,8 +212,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MD%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">MD语法</span>
+                  <a href="/categories/CSharp/" itemprop="url" rel="index">
+                    <span itemprop="name">CSharp</span>
                   </a>
                 </span>
             </span>
@@ -227,15 +229,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Markdown基本语法"><a href="#Markdown基本语法" class="headerlink" title="Markdown基本语法"></a>Markdown基本语法</h1><hr>
-<h2 id="一、标题"><a href="#一、标题" class="headerlink" title="一、标题"></a>一、标题</h2><p>标题是在标题文字前加若干个”#”符合来生成的，几个”#”就是几级标题；</p>
+        <h1 id="异步方法介绍"><a href="#异步方法介绍" class="headerlink" title="异步方法介绍"></a>异步方法介绍</h1><p>大多数编程语言都支持多进程、多线程编程，在Win窗体应用开发中，使用多线程开发可以大大提高程序性能，避免出现卡顿，C#中定义多线程略微有一些繁琐。在某个情况下，只是为某个简单方法定义一个线程有些浪费，这时就可以使用C#中的异步方法，让程序运行到这里时，自动定义一个线程去执行异步方法，程序员不需要为此多花费精力。异步方法在完成其工作之前即返回到调用该方法的地方，主进程可以继续执行，不需要等待异步方法执行完成。</p>
+<h2 id="定义一个异步方法"><a href="#定义一个异步方法" class="headerlink" title="定义一个异步方法"></a>定义一个异步方法</h2><p>在C#中自定义异步方法，最简单的情况就是使用Task.Run()配合lambda表达式。定义异步方法时，其方法头需要用async标识出，并且在方法体中包含一个或多个await表达式，async告诉编译器该方法是异步方法，await表达式告诉编译器该行为异步完成的任务，异步方法的返回值必为三种返回类型：void、Task和Task<T>，异步方法的参数可以是除out和ref外的任意类型，同时按约定，异步方法名末尾应该以Async结尾。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">PrintDelayAsync</span>(<span class="params"><span class="keyword">string</span> str</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">await</span> Task.Run(() =&gt; PrintDelay(str));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">PrintDelay</span>(<span class="params"><span class="keyword">string</span> str</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Thread.Sleep(<span class="number">3000</span>);</span><br><span class="line">            Console.WriteLine(<span class="string">"&#123;0&#125; in async method after 3 seconds."</span>, str);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码定义了名为PrintDelayAsync(string str)的方法，方法体中包含await表达式，调用了Task.Run()方法，并使用lambda表达式作为Task.Run()的参数，调用该异步方法，线程会停止3秒，然后在控制台输出一段文字。</p>
 <hr>
-<h2 id="二、字体"><a href="#二、字体" class="headerlink" title="二、字体"></a>二、字体</h2><p>加粗是用两个”*”将需要加粗的文字包围，<strong>加粗</strong><br>斜体是用一个”*”将需要倾斜的文字包围，<em>倾斜</em><br>倾斜加粗是三个”*”，<strong><em>倾斜加粗</em></strong><br>删除线是用两个”<del>“,<br>~</del>删除线~~</p>
-<hr>
-<h2 id="三、引用"><a href="#三、引用" class="headerlink" title="三、引用"></a>三、引用</h2><p>一个”&gt;”，两个”&gt;&gt;”，或者无限多个”&gt;&gt;&gt;&gt;…&gt;&gt;&gt;&gt;”</p>
-<blockquote>
-<p><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></p>
-</blockquote>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Program pp = <span class="keyword">new</span> Program();</span><br><span class="line">            pp.PrintDelayAsync(<span class="string">"Hello"</span>);</span><br><span class="line">            <span class="keyword">int</span> n = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (n &lt;= <span class="number">10</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(<span class="string">"&#123;0&#125; Hello in main thread."</span>, n);</span><br><span class="line">                n++;</span><br><span class="line">                Thread.Sleep(<span class="number">500</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>上述主程序将pp对象声明为Program类并初始化，进而可以通过调用Program中的异步方法，不会阻塞主程序执行。执行结果如图所示：<br><img src="%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="执行结果" title="执行结果"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>当某个方法存在阻塞程序执行的可能时，可以新定义一个线程或者使用异步方法，使用异步方法时，在异步方法体执行完成前就可以返回至调用方法，比定义线程更加容易，当然两者各有各的优势，应分情况使用。</p>
 
     </div>
 
@@ -249,17 +250,14 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/15/hello-world/" rel="next" title="Hello World">
-                  <i class="fa fa-chevron-left"></i> Hello World
+                <a href="/2019/12/05/C-%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B/" rel="next" title="C#中的泛型">
+                  <i class="fa fa-chevron-left"></i> C#中的泛型
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/16/C-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" rel="prev" title="C++链表的基本用法">
-                  C++链表的基本用法 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -298,7 +296,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Markdown基本语法"><span class="nav-number">1.</span> <span class="nav-text">Markdown基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、标题"><span class="nav-number">1.1.</span> <span class="nav-text">一、标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、字体"><span class="nav-number">1.2.</span> <span class="nav-text">二、字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、引用"><span class="nav-number">1.3.</span> <span class="nav-text">三、引用</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异步方法介绍"><span class="nav-number">1.</span> <span class="nav-text">异步方法介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义一个异步方法"><span class="nav-number">1.1.</span> <span class="nav-text">定义一个异步方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
